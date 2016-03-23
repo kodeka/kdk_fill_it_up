@@ -60,9 +60,15 @@ class FillItUpController
 		$response = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
 		if (is_wp_error($response))
 		{
-			status_header(500);
-			_e($response->get_error_message());
-			return false;
+			$error = 'Could not fetch definitions file: '.$url.'. Error: '.$response->get_error_message();
+			/// Fallback to file_get_contents wp_remote_get has issues with SSLv3 from cdn.joomlaworks.org
+			$response = array('body' => @file_get_contents($url));
+			if(!$response['body'])
+			{
+				status_header(500);
+				_e($error);
+				return false;
+			}
 		}
 
 		$json = json_decode($response['body']);
@@ -78,9 +84,15 @@ class FillItUpController
 			$archive = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
 			if (is_wp_error($archive))
 			{
-				status_header(500);
-				_e($archive->get_error_message());
-				return false;
+				$error = 'Could not fetch archive of images: '.$url.'. Error: '.$archive->get_error_message();
+				// Fallback to file_get_contents wp_remote_get has issues with SSLv3 from cdn.joomlaworks.org
+				$archive = array('body' => @file_get_contents($url));
+				if(!$archive['body'])
+				{
+					status_header(500);
+					_e($error);
+					return false;
+				}
 			}
 			$uploadDirectory = wp_upload_dir();
 			$archiveFileName = basename($url);
@@ -262,9 +274,15 @@ class FillItUpController
 			$result = wp_remote_get($image, array('timeout' => 30, 'sslverify' => false));
 			if (is_wp_error($result))
 			{
-				status_header(500);
-				_e($result->get_error_message());
-				return false;
+				$error = 'Could not fetch sample image: '.$image.'. Error: '.$result->get_error_message();
+				// Fallback to file_get_contents wp_remote_get has issues with SSLv3 from cdn.joomlaworks.org
+				$result = array('body' => @file_get_contents($image));
+				if(!$result['body'])
+				{
+					status_header(500);
+					_e($error);
+					return false;
+				}
 			}
 			$buffer = $result['body'];
 			$basename = basename($image);
