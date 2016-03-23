@@ -12,6 +12,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+define('FILLITUP_DIR', plugin_dir_path(__FILE__));
+
 class FillItUp
 {
 	public function __construct()
@@ -55,7 +57,7 @@ class FillItUp
 			$this,
 			'_settings'
 		));
-		add_menu_page('Fill It Up', 'Fill It Up', 'manage_options', 'fillitup/admin/index.php', '', 'data:image/svg+xml;base64,'.base64_encode(file_get_contents(WP_PLUGIN_DIR.'/'.dirname(plugin_basename(__FILE__)).'/admin/assets/images/fillitup.svg')));
+		add_menu_page('Fill It Up', 'Fill It Up', 'manage_options', 'fillitup/admin/index.php', '', 'data:image/svg+xml;base64,'.base64_encode(file_get_contents(FILLITUP_DIR.'admin/assets/images/fillitup.svg')));
 		add_submenu_page( 'fillitup/admin/index.php', 'Generator', 'Generator', 'manage_options', 'fillitup/admin/index.php');
 		add_submenu_page( 'fillitup/admin/index.php', 'Settings', 'Settings','manage_options', 'options-general.php?page=fillitup-options');
 	}
@@ -112,7 +114,7 @@ class FillItUp
 
 	public function ajax()
 	{
-		require WP_PLUGIN_DIR.'/fillitup/admin/index.php';
+		require FILLITUP_DIR.'admin/index.php';
 		die ;
 	}
 

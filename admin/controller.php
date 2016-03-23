@@ -36,9 +36,9 @@ class FillItUpController
 	public function display()
 	{
 		$name = isset($_GET['view']) ? $_GET['view'] : 'dashboard';
-		if (file_exists(WP_PLUGIN_DIR.'/fillitup/admin/views/'.$name.'.php'))
+		if (file_exists(FILLITUP_DIR.'admin/views/'.$name.'.php'))
 		{
-			require WP_PLUGIN_DIR.'/fillitup/admin/views/'.$name.'.php';
+			require FILLITUP_DIR.'admin/views/'.$name.'.php';
 			$class = 'FillItUpView'.ucfirst($name);
 			$view = new $class();
 			$view->display();
@@ -168,7 +168,7 @@ class FillItUpController
 		}
 
 		// Get generator
-		require_once WP_PLUGIN_DIR.'/fillitup/admin/lib/autoload.php';
+		require_once FILLITUP_DIR.'admin/lib/autoload.php';
 		$generator = Faker\Factory::create();
 
 		// Init data
@@ -322,7 +322,7 @@ class FillItUpController
 
 	private function generateUsers($count, $role)
 	{
-		require_once WP_PLUGIN_DIR.'/fillitup/admin/lib/autoload.php';
+		require_once FILLITUP_DIR.'admin/lib/autoload.php';
 		$generator = Faker\Factory::create();
 		for ($i = 0; $i < $count; $i++)
 		{

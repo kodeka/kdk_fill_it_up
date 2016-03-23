@@ -29,7 +29,7 @@ class FillItUpViewDashboard
         $info['memory'] = ini_get('memory_limit');
         $this->info = $info;
 
-        $layout = WP_PLUGIN_DIR.'/fillitup/admin/layouts/'.$this->layout.'.php';
+        $layout = FILLITUP_DIR.'admin/layouts/'.$this->layout.'.php';
         ob_start();
         include $layout;
         $output = ob_get_contents();

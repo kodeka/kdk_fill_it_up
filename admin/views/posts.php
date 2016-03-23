@@ -30,7 +30,7 @@ class FillItUpViewPosts
 
 		$postTypes = array_merge($native, $custom);
 
-		$layout = WP_PLUGIN_DIR.'/fillitup/admin/layouts/'.$this->layout.'.php';
+		$layout = FILLITUP_DIR.'admin/layouts/'.$this->layout.'.php';
 		ob_start();
 		include $layout;
 		$output = ob_get_contents();

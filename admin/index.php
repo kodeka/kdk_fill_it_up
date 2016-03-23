@@ -14,6 +14,6 @@ if (!defined('ABSPATH')) {
 
 $task = isset($_GET['task']) ? $_GET['task'] : '';
 
-require WP_PLUGIN_DIR.'/fillitup/admin/controller.php';
+require FILLITUP_DIR.'admin/controller.php';
 $controller = new FillItUpController();
 $controller->execute($task);
