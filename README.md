@@ -16,7 +16,7 @@ In the future, we plan to release pre-built sets of definition files from other 
 
 ## Use it
 1. Get the latest build, ready to upload to WordPress: http://www.joomlaworks.net/downloads/?f=jw_fillitup_for_wp-v1.0.0.zip
-2. Edit the plugin's Settings and add this demo definition file: https://cdn.joomlaworks.org/fillitup/demo/900x600.json
+2. Edit the plugin's Settings and add this demo definition file: https://cdn.joomlaworks.org/fillitup/demo/900x600_noembeds.json
 3. Go back to th plugin and hit "Generate content & users"
 4. Adjust your settings and go!
 
