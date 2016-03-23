@@ -57,7 +57,7 @@ class FillItUpController
 		}
 
 		// Download definitions
-		$response = wp_remote_get($url);
+		$response = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
 		if (is_wp_error($response))
 		{
 			status_header(500);
@@ -75,7 +75,7 @@ class FillItUpController
 		foreach ($json as $entry)
 		{
 			$url = $entry->images;
-			$archive = wp_remote_get($url);
+			$archive = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
 			if (is_wp_error($archive))
 			{
 				status_header(500);
@@ -259,7 +259,7 @@ class FillItUpController
 		if (post_type_supports($type, 'thumbnail') && $imagesFlag)
 		{
 			$image = $this->getRandomImage($category);
-			$result = wp_remote_get($image);
+			$result = wp_remote_get($image, array('timeout' => 30, 'sslverify' => false));
 			if (is_wp_error($result))
 			{
 				status_header(500);
