@@ -61,7 +61,7 @@ class FillItUpController
 		if (is_wp_error($response))
 		{
 			$error = 'Could not fetch definitions file: '.$url.'. Error: '.$response->get_error_message();
-			/// Fallback to file_get_contents wp_remote_get has issues with SSLv3 from cdn.joomlaworks.org
+			// Fallback to file_get_contents - wp_remote_get has issues with SSLv3
 			$response = array('body' => @file_get_contents($url));
 			if(!$response['body'])
 			{
@@ -85,7 +85,7 @@ class FillItUpController
 			if (is_wp_error($archive))
 			{
 				$error = 'Could not fetch archive of images: '.$url.'. Error: '.$archive->get_error_message();
-				// Fallback to file_get_contents wp_remote_get has issues with SSLv3 from cdn.joomlaworks.org
+				// Fallback to file_get_contents - wp_remote_get has issues with SSLv3
 				$archive = array('body' => @file_get_contents($url));
 				if(!$archive['body'])
 				{
@@ -275,7 +275,7 @@ class FillItUpController
 			if (is_wp_error($result))
 			{
 				$error = 'Could not fetch sample image: '.$image.'. Error: '.$result->get_error_message();
-				// Fallback to file_get_contents wp_remote_get has issues with SSLv3 from cdn.joomlaworks.org
+				// Fallback to file_get_contents - wp_remote_get has issues with SSLv3
 				$result = array('body' => @file_get_contents($image));
 				if(!$result['body'])
 				{
