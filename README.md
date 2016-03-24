@@ -29,7 +29,7 @@ In the future, we plan to release pre-built sets of definition files from other 
 
 ## Use it
 1. Get the latest build, ready to upload to WordPress: http://www.joomlaworks.net/downloads/?f=jw_fillitup_for_wp-v1.0.1.zip
-2. Edit the plugin's Settings and add this demo definition file: https://cdn.joomlaworks.org/fillitup/demo/900x600.json?upd
+2. Edit the plugin's Settings and add this demo definition file: https://cdn.joomlaworks.org/fillitup/demo/900x600.json?upd - if you get any issues related to SSL (especially while testing Fill It Up locally), simply swap this URL with its non-secure version: http://cdn.joomlaworks.org/fillitup/demo/900x600.json?upd
 3. Go back to the plugin and hit "Generate content & users"
 4. Adjust your settings and go!
 
