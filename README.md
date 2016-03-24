@@ -29,6 +29,14 @@ Examine the structure of the demo definition file: https://cdn.joomlaworks.org/f
 You'll notice that this file references some .zip files. These .zip files contain images which are fetched by Fill It Up and inserted in WordPress items in the category name specified in the same definition block. Additionally, per category block, you can pass one JavaScript array for videos (use links for video providers supported by WordPress using oEmbed, e.g. YouTube or Vimeo, or use entire embed snippets for others) and one JavaScript array for Flickr sets (albums) (use entire embed snippets). Now since the file has to be valid JSON, make sure you escape any double quotes (\") when inserting embed snippets into each array.
 
 
+## Upgrading
+Until we upload the plugin in the WordPress Plugis Directory, there are 2 ways to update Fill It Up in WordPress:
+
+a) The easy way: use the awesome & free [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin to be able to simply install any new version of Fill It Up on top of any existing one.
+
+b) The old-fashioned way: use FTP to connect to your WordPress site and then navigate to your plugins folder and simply remove the folder named "fillitup". Now extract on your PC the zip download with the new version and upload the entire "fillitup" folder on your WordPress site's plugins folder.
+
+
 ***Enjoy and share it :)***
 
 ===
