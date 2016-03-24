@@ -1,9 +1,19 @@
-# Fill It Up (for WordPress)
+# Fill It Up (for WordPress) [v1.0.1]
+***
 Fill It Up for WordPress is a handy plugin to mass generate content &amp; users in WordPress.
+
+You have the choice of easily creating your own set of re-usable dummy content (essentially made up of sets of images, links and embed snippets) or you can use third-party sets, curated by other users.
 
 By using Fill It Up you speed up the initial development process until actual, proper content is in place.
 
+It's that simple. Really :)
+
+That's why it took only a few minutes to set up this demo site: http://demo.joomlaworks.net/wp/
+
 ![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_v1.x_preview.png)
+
+## Demo
+Check out the demo site: http://demo.joomlaworks.net/wp/
 
 
 ## Why?
