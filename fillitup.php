@@ -3,7 +3,7 @@
  Plugin Name: Fill It Up
  Description: Dummy content & user generator for WordPress
  Author: JoomlaWorks
- Version: 1.0.0
+ Version: 1.0.1
  Author URI: http://joomlaworks.net
  */
 
@@ -107,8 +107,8 @@ class FillItUp
 		$screen = get_current_screen();
 		if($screen->id == 'fillitup/admin/index' || $screen->id == 'settings_page_fillitup-options')
 		{
-			wp_enqueue_script('fillitup', plugins_url('/fillitup/admin/assets/js/fillitup.js'), array('jquery'), '1.0.0');
-			wp_enqueue_style('fillitup', plugins_url('/fillitup/admin/assets/css/fillitup.css'), array(), '1.0.0');
+			wp_enqueue_script('fillitup', plugins_url('/fillitup/admin/assets/js/fillitup.js'), array('jquery'), '1.0.1');
+			wp_enqueue_style('fillitup', plugins_url('/fillitup/admin/assets/css/fillitup.css'), array(), '1.0.1');
 		}
 	}
 

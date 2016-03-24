@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<div id="fillItUpAdminFooter">
-			<a target="_blank" href="http://www.joomlaworks.net/fill-it-up">Fill It Up v1.0.0</a> | Copyright &copy; 2006-<?php echo date('Y'); ?> <a target="_blank" href="http://www.joomlaworks.net/">JoomlaWorks Ltd.</a>
+			<a target="_blank" href="http://www.joomlaworks.net/fill-it-up">Fill It Up v1.0.1</a> | Copyright &copy; 2006-<?php echo date('Y'); ?> <a target="_blank" href="http://www.joomlaworks.net/">JoomlaWorks Ltd.</a>
 		</div>
 	</div>
 </div>

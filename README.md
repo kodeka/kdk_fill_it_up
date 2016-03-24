@@ -3,7 +3,7 @@ Fill It Up for WordPress is a handy plugin to mass generate content &amp; users 
 
 By using Fill It Up you speed up the initial development process until actual, proper content is in place.
 
-![Fill It Up v1.0.0 - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_v1.0.0_preview.png)
+![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_v1.x_preview.png)
 
 
 ## Why?
@@ -15,12 +15,19 @@ In the future, we plan to release pre-built sets of definition files from other 
 
 
 ## Use it
-1. Get the latest build, ready to upload to WordPress: http://www.joomlaworks.net/downloads/?f=jw_fillitup_for_wp-v1.0.0.zip
+1. Get the latest build, ready to upload to WordPress: http://www.joomlaworks.net/downloads/?f=jw_fillitup_for_wp-v1.0.1.zip
 2. Edit the plugin's Settings and add this demo definition file: https://cdn.joomlaworks.org/fillitup/demo/900x600.json?upd
-3. Go back to th plugin and hit "Generate content & users"
+3. Go back to the plugin and hit "Generate content & users"
 4. Adjust your settings and go!
 
 Depending on the number of items you choose to generate, it will take from a few seconds to a few minutes to complete, so be patient. You'll see a success message when the process is complete.
+
+
+## Create your own dummy content sets
+Examine the structure of the demo definition file: https://cdn.joomlaworks.org/fillitup/demo/900x600.json?upd
+
+You'll notice that this file references some .zip files. These .zip files contain images which are fetched by Fill It Up and inserted in WordPress items in the category name specified in the same definition block. Additionally, per category block, you can pass one JavaScript array for videos (use links for video providers supported by WordPress using oEmbed, e.g. YouTube or Vimeo, or use entire embed snippets for others) and one JavaScript array for Flickr sets (albums) (use entire embed snippets). Now since the file has to be valid JSON, make sure you escape any double quotes (\") when inserting embed snippets into each array.
+
 
 ***Enjoy and share it :)***
 
