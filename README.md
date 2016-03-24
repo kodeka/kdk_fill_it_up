@@ -10,7 +10,10 @@ It's that simple. Really :)
 
 That's why it took only a few minutes to set up this demo site: http://demo.joomlaworks.net/wp/
 
+
+## Screenshots
 ![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_v1.x_preview.png)
+
 
 ## Demo
 Check out the demo site: http://demo.joomlaworks.net/wp/
