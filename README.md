@@ -15,8 +15,12 @@ That's why it took only a few minutes to set up this demo site: http://demo.joom
 ![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_v1.x_preview.png)
 
 
-## Demo
-Check out the demo site: http://demo.joomlaworks.net/wp/
+## Demos
+Check out the official demo site: http://demo.joomlaworks.net/wp/
+
+Our friends at CSSIgniter have also uploaded a demo site featuring their latest free theme, [Olsen](http://www.cssigniter.com/ignite/themes/olsen-light/), using Fill It Up (for WordPress): http://www.cssigniter.com/playground/
+
+*Are you a theme developer using Fill It Up (for WordPress)? [Get in touch with us](http://www.joomlaworks.net/support/contact) and ask to include your demo sites here too!*
 
 
 ## Why?
