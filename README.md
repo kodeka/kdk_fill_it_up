@@ -12,7 +12,7 @@ That's why it took only a few minutes to set up this demo site: http://demo.joom
 
 
 ## Screenshots
-![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_v1.x_preview.png)
+![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_for_wordpress_v1.x_preview.png)
 
 
 ## Demos
