@@ -59,6 +59,6 @@ b) The old-fashioned way: use FTP to connect to your WordPress site and then nav
 ***Enjoy and share it :)***
 
 ===
-Fill It Up for WordPress is released under the GNU/GPL v2 license.
+Fill It Up for WordPress is released under the GNU/GPL license.
 
 Copyright (c) 2006 - 2016 [JoomlaWorks Ltd.](http://www.joomlaworks.net)
