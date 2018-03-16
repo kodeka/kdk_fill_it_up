@@ -1,3 +1,19 @@
+<?php
+/**
+ * @version    1.0.x
+ * @package    Fill It Up
+ * @author     JoomlaWorks https://www.joomlaworks.net
+ * @copyright  Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ */
+
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+?>
+
 <div class="wrap">
 	<h2 class="plugin-title">Fill It Up</h2>
 	<div id="fillitup-form-container">
@@ -68,9 +84,9 @@
     <div id="fillitup-completed-message" style="display:none;">
     	<h3><?php _e('Success!', 'jw_fillitup'); ?></h3>
     	<a href="admin.php?page=fillitup/admin/index.php" class="button button-primary"><?php _e('Back to Fill It Up', 'jw_fillitup'); ?></a> <?php _e('or', 'jw_fillitup'); ?> <a id="fillitup-start-over-button" href="#" class="button button-primary"><?php _e('Start Over', 'jw_fillitup'); ?></a>
-    	<img id="fillitup-success-img" src="//cdn.joomlaworks.org/fillitup/gifs/sam_rockwell_yeah.gif" alt="Success!" />
+    	<img id="fillitup-success-img" src="https://cdn.joomlaworks.org/gifs/sam_rockwell_yeah.gif" alt="Success!" />
     </div>
 	<div id="fillItUpAdminFooter">
-		<a target="_blank" href="http://www.joomlaworks.net/fill-it-up">Fill It Up v1.0.1</a> | Copyright &copy; 2006-<?php echo date('Y'); ?> <a target="_blank" href="http://www.joomlaworks.net/">JoomlaWorks Ltd.</a>
+		<a target="_blank" href="https://www.joomlaworks.net/fill-it-up">Fill It Up v1.0.2</a> | Copyright &copy; 2006-<?php echo date('Y'); ?> <a target="_blank" href="https://www.joomlaworks.net/">JoomlaWorks Ltd.</a>
 	</div>
 </div>

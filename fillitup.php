@@ -3,8 +3,8 @@
  Plugin Name: Fill It Up
  Description: Dummy content & user generator for WordPress
  Author: JoomlaWorks
- Version: 1.0.1
- Author URI: http://joomlaworks.net
+ Version: 1.0.2
+ Author URI: https://www.joomlaworks.net
  */
 
 // Exit if accessed directly
@@ -68,7 +68,7 @@ class FillItUp
 		settings_fields('basic');
 		do_settings_sections('fillitup-section');
 		submit_button();
-		echo '<p>'.__('Hint: make sure the remote URL ends in .json - it would be awesome if you had a look at the <a href="http://www.joomlaworks.net/fill-it-up-documentation">documentation</a> as well :)', 'jw_fillitup').'</p></form></div>';
+		echo '<p>'.__('Hint: make sure the remote URL ends in .json - it would be awesome if you had a look at the <a href="https://www.joomlaworks.net/fill-it-up-documentation">documentation</a> as well :)', 'jw_fillitup').'</p></form></div>';
 	}
 
 	public function adminInit()
@@ -107,8 +107,8 @@ class FillItUp
 		$screen = get_current_screen();
 		if($screen->id == 'fillitup/admin/index' || $screen->id == 'settings_page_fillitup-options')
 		{
-			wp_enqueue_script('fillitup', plugins_url('/fillitup/admin/assets/js/fillitup.js'), array('jquery'), '1.0.1');
-			wp_enqueue_style('fillitup', plugins_url('/fillitup/admin/assets/css/fillitup.css'), array(), '1.0.1');
+			wp_enqueue_script('fillitup', plugins_url('/fillitup/admin/assets/js/fillitup.js'), array('jquery'), '1.0.2');
+			wp_enqueue_style('fillitup', plugins_url('/fillitup/admin/assets/css/fillitup.css'), array(), '1.0.2');
 		}
 	}
 

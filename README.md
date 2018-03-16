@@ -1,4 +1,4 @@
-# Fill It Up (for WordPress) [v1.0.1]
+# Fill It Up (for WordPress) [v1.0.2]
 ***
 Fill It Up for WordPress is a handy free plugin to mass generate content &amp; users in WordPress.
 
@@ -20,7 +20,7 @@ Check out the official demo site: http://demo.joomlaworks.net/wp/
 
 Our friends at CSSIgniter have also uploaded a demo site featuring their latest free theme, [Olsen](http://www.cssigniter.com/ignite/themes/olsen-light/), using Fill It Up (for WordPress): http://www.cssigniter.com/playground/
 
-*Are you a theme developer using Fill It Up (for WordPress)? [Get in touch with us](http://www.joomlaworks.net/support/contact) and ask to include your demo sites here too!*
+*Are you a theme developer using Fill It Up (for WordPress)? [Get in touch with us](https://www.joomlaworks.net/support/contact) and ask to include your demo sites here too!*
 
 
 ## Why?
@@ -32,7 +32,7 @@ In the future, we plan to release pre-built sets of definition files from other 
 
 
 ## Use it
-1. Get the latest build, ready to upload to WordPress: http://www.joomlaworks.net/downloads/?f=jw_fillitup_for_wp-v1.0.1.zip (please DO NOT use the zip file download provided by GitHub automatically as it cannot be directly installed on WordPress)
+1. Get the latest build, ready to upload to WordPress: https://www.joomlaworks.net/downloads/?f=jw_fillitup_for_wp-v1.0.2.zip (please DO NOT use the zip file download provided by GitHub automatically as it cannot be directly installed on WordPress)
 2. Edit the plugin's Settings and add this demo definition file:
    - If you already use HTTPS: https://cdn.joomlaworks.org/fillitup/demo/900x600.json
    - If you get any issues related to SSL (especially while testing Fill It Up locally), use this URL instead: http://cdn.joomlaworks.org/fillitup/demo/900x600_plain_http.json
@@ -61,4 +61,4 @@ b) The old-fashioned way: use FTP to connect to your WordPress site and then nav
 ===
 Fill It Up for WordPress is released under the GNU/GPL license.
 
-Copyright (c) 2006 - 2016 [JoomlaWorks Ltd.](http://www.joomlaworks.net)
+Copyright (c) 2006 - 2018 [JoomlaWorks Ltd.](https://www.joomlaworks.net)

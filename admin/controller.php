@@ -2,14 +2,15 @@
 /**
  * @version    1.0.x
  * @package    Fill It Up
- * @author     JoomlaWorks http://www.joomlaworks.net
- * @copyright  Copyright (c) 2006 - 2016 JoomlaWorks Ltd. All rights reserved.
+ * @author     JoomlaWorks https://www.joomlaworks.net
+ * @copyright  Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
  * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
 // Exit if accessed directly
-if (!defined('ABSPATH'))
-	exit ;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class FillItUpController
 {
