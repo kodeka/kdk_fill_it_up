@@ -14,388 +14,337 @@ if (!defined('ABSPATH')) {
 
 class FillItUpController
 {
+    public function execute($task)
+    {
+        if (!$task) {
+            $task = 'display';
+        }
+        $task = strtolower($task);
+        if (method_exists($this, $task)) {
+            return $this->$task();
+        } else {
+            status_header(404);
+            return false;
+        }
+    }
 
-	public function execute($task)
-	{
-		if (!$task)
-		{
-			$task = 'display';
-		}
-		$task = strtolower($task);
-		if (method_exists($this, $task))
-		{
-			return $this->$task();
-		}
-		else
-		{
-			status_header(404);
-			return false;
-		}
+    public function display()
+    {
+        $name = isset($_GET['view']) ? $_GET['view'] : 'dashboard';
+        if (file_exists(FILLITUP_DIR.'admin/views/'.$name.'.php')) {
+            require FILLITUP_DIR.'admin/views/'.$name.'.php';
+            $class = 'FillItUpView'.ucfirst($name);
+            $view = new $class();
+            $view->display();
+        }
+    }
 
-	}
+    public function definitions()
+    {
+        // Get URL
+        $url = get_option('definitionsUrl');
+        if (trim($url) === '') {
+            status_header(409);
+            _e('Make sure a data definitions URL has been set in settings', 'kdk_fill_it_up');
+            return false;
+        }
 
-	public function display()
-	{
-		$name = isset($_GET['view']) ? $_GET['view'] : 'dashboard';
-		if (file_exists(FILLITUP_DIR.'admin/views/'.$name.'.php'))
-		{
-			require FILLITUP_DIR.'admin/views/'.$name.'.php';
-			$class = 'FillItUpView'.ucfirst($name);
-			$view = new $class();
-			$view->display();
-		}
-	}
+        // Download definitions
+        $response = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
+        if (is_wp_error($response)) {
+            $error = 'Could not fetch definitions file: '.$url.'. Error: '.$response->get_error_message();
+            // Fallback to file_get_contents - wp_remote_get has issues with SSLv3
+            $response = array('body' => @file_get_contents($url));
+            if (!$response['body']) {
+                status_header(500);
+                _e($error);
+                return false;
+            }
+        }
 
-	public function definitions()
-	{
-		// Get URL
-		$url = get_option('definitionsUrl');
-		if (trim($url) === '')
-		{
-			status_header(409);
-			_e('Make sure a data definitions URL has been set in settings', 'jw_fillitup');
-			return false;
-		}
+        $json = json_decode($response['body']);
 
-		// Download definitions
-		$response = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
-		if (is_wp_error($response))
-		{
-			$error = 'Could not fetch definitions file: '.$url.'. Error: '.$response->get_error_message();
-			// Fallback to file_get_contents - wp_remote_get has issues with SSLv3
-			$response = array('body' => @file_get_contents($url));
-			if(!$response['body'])
-			{
-				status_header(500);
-				_e($error);
-				return false;
-			}
-		}
+        // Get filesystem
+        WP_Filesystem();
+        global $wp_filesystem;
 
-		$json = json_decode($response['body']);
+        // Download and extract images
+        foreach ($json as $entry) {
+            $url = $entry->images;
+            $archive = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
+            if (is_wp_error($archive)) {
+                $error = 'Could not fetch archive of images: '.$url.'. Error: '.$archive->get_error_message();
+                // Fallback to file_get_contents - wp_remote_get has issues with SSLv3
+                $archive = array('body' => @file_get_contents($url));
+                if (!$archive['body']) {
+                    status_header(500);
+                    _e($error);
+                    return false;
+                }
+            }
+            $uploadDirectory = wp_upload_dir();
+            $archiveFileName = basename($url);
+            $archiveFileName = wp_unique_filename($uploadDirectory['path'], $archiveFileName);
+            $zip = $uploadDirectory['path'].'/'.$archiveFileName;
+            file_put_contents($zip, $archive['body']);
+            $folder = uniqid('fillitup');
+            $target = $uploadDirectory['path'].DIRECTORY_SEPARATOR.$folder;
+            $result = wp_mkdir_p($target);
+            if (!$result) {
+                status_header(500);
+                _e('Could not create the required directories', 'kdk_fill_it_up');
+                return false;
+            }
+            $result = unzip_file($zip, $target);
+            $wp_filesystem->delete($zip);
+            if (is_wp_error($result)) {
+                status_header(500);
+                _e($result->get_error_message());
+                return false;
+            }
+            $entry->images = $uploadDirectory['subdir'].DIRECTORY_SEPARATOR.$folder;
+        }
 
-		// Get filesystem
-		WP_Filesystem();
-		global $wp_filesystem;
+        // Pass definitions to the output
+        echo json_encode($json);
+        return true;
+    }
 
-		// Download and extract images
-		foreach ($json as $entry)
-		{
-			$url = $entry->images;
-			$archive = wp_remote_get($url, array('timeout' => 30, 'sslverify' => false));
-			if (is_wp_error($archive))
-			{
-				$error = 'Could not fetch archive of images: '.$url.'. Error: '.$archive->get_error_message();
-				// Fallback to file_get_contents - wp_remote_get has issues with SSLv3
-				$archive = array('body' => @file_get_contents($url));
-				if(!$archive['body'])
-				{
-					status_header(500);
-					_e($error);
-					return false;
-				}
-			}
-			$uploadDirectory = wp_upload_dir();
-			$archiveFileName = basename($url);
-			$archiveFileName = wp_unique_filename($uploadDirectory['path'], $archiveFileName);
-			$zip = $uploadDirectory['path'].'/'.$archiveFileName;
-			file_put_contents($zip, $archive['body']);
-			$folder = uniqid('fillitup');
-			$target = $uploadDirectory['path'].DIRECTORY_SEPARATOR.$folder;
-			$result = wp_mkdir_p($target);
-			if (!$result)
-			{
-				status_header(500);
-				_e('Could not create the required directories', 'jw_fillitup');
-				return false;
-			}
-			$result = unzip_file($zip, $target);
-			$wp_filesystem->delete($zip);
-			if (is_wp_error($result))
-			{
-				status_header(500);
-				_e($result->get_error_message());
-				return false;
-			}
-			$entry->images = $uploadDirectory['subdir'].DIRECTORY_SEPARATOR.$folder;
-		}
+    public function generate()
+    {
+        check_ajax_referer();
 
-		// Pass definitions to the output
-		echo json_encode($json);
-		return true;
+        // Get definitions
+        $definitions = json_decode(stripslashes($_POST['definitions']));
 
-	}
+        // Check that definitions is a valid object
+        if (!is_array($definitions) || count($definitions) === 0) {
+            status_header(409);
+            _e('Invalid data definitions', 'kdk_fill_it_up');
+            return false;
+        }
 
-	public function generate()
-	{
+        // Get type
+        $type = $_POST['type'];
 
-		check_ajax_referer();
+        // Get generator flags
+        $imagesFlag = isset($_POST['images']) && $_POST['images'];
+        $videosFlag = isset($_POST['videos']) && $_POST['videos'];
+        $galleriesFlag = isset($_POST['galleries']) && $_POST['galleries'];
+        $authorFlag = $_POST['author'];
 
-		// Get definitions
-		$definitions = json_decode(stripslashes($_POST['definitions']));
+        // Check post type existance
+        if (!post_type_exists($type)) {
+            status_header(409);
+            _e('Invalid post type', 'kdk_fill_it_up');
+            return false;
+        }
 
-		// Check that definitions is a valid object
-		if (!is_array($definitions) || count($definitions) === 0)
-		{
-			status_header(409);
-			_e('Invalid data definitions', 'jw_fillitup');
-			return false;
-		}
+        // Get total
+        $total = (int)$_POST['total'];
 
-		// Get type
-		$type = $_POST['type'];
+        // Get offset
+        $offset = (int)$_POST['offset'];
 
-		// Get generator flags
-		$imagesFlag = isset($_POST['images']) && $_POST['images'];
-		$videosFlag = isset($_POST['videos']) && $_POST['videos'];
-		$galleriesFlag = isset($_POST['galleries']) && $_POST['galleries'];
-		$authorFlag = $_POST['author'];
+        // Get users generate number
+        $users = (int)$_POST['users'];
 
-		// Check post type existance
-		if (!post_type_exists($type))
-		{
-			status_header(409);
-			_e('Invalid post type', 'jw_fillitup');
-			return false;
-		}
+        // Users role
+        $role = $_POST['role'];
 
-		// Get total
-		$total = (int)$_POST['total'];
+        // If it's the first post generate the categories and users first
+        if ($offset == 1) {
+            $this->generateCategories($definitions);
+            if ($users) {
+                $this->generateUsers($users, $role);
+            }
+        }
 
-		// Get offset
-		$offset = (int)$_POST['offset'];
+        // Get generator
+        require_once FILLITUP_DIR.'admin/lib/autoload.php';
+        $generator = Faker\Factory::create();
 
-		// Get users generate number
-		$users = (int)$_POST['users'];
+        // Init data
+        $row = array('post_type' => $type, 'post_status' => 'publish');
+        $category = $this->getRandomCategory($definitions);
 
-		// Users role
-		$role = $_POST['role'];
+        // Title
+        if (post_type_supports($type, 'title')) {
+            $row['post_title'] = $generator->sentence(rand(3, 6));
+        }
 
-		// If it's the first post generate the categories and users first
-		if ($offset == 1)
-		{
-			$this->generateCategories($definitions);
-			if($users) {
-				$this->generateUsers($users, $role);
-			}
-		}
+        // Content
+        if (post_type_supports($type, 'editor')) {
+            $row['post_content'] = '<p>'.implode('</p><p>', $generator->paragraphs(rand(1, 4))).'</p>';
+            $row['post_content'] .= '<!--more-->';
+            $row['post_content'] .= '<p>'.implode('</p><p>', $generator->paragraphs(rand(2, 6))).'</p>';
+            if ($galleriesFlag) {
+                $row['post_content'] .= '<h3>Image Gallery</h3>'.$this->getRandomGallery($category);
+            }
+            if ($videosFlag) {
+                $row['post_content'] .= '<h3>Video</h3>'.PHP_EOL.$this->getRandomMedia($category).PHP_EOL;
+            }
+        }
 
-		// Get generator
-		require_once FILLITUP_DIR.'admin/lib/autoload.php';
-		$generator = Faker\Factory::create();
+        // Author
+        if (post_type_supports($type, 'author') && $authorFlag == 'random') {
+            $row['post_author'] = $this->getRandomUser();
+        }
 
-		// Init data
-		$row = array('post_type' => $type, 'post_status' => 'publish');
-		$category = $this->getRandomCategory($definitions);
+        // Excerpt
+        if (post_type_supports($type, 'excerpt')) {
+        }
 
-		// Title
-		if (post_type_supports($type, 'title'))
-		{
-			$row['post_title'] = $generator->sentence(rand(3, 6));
-		}
+        // Trackbacks
+        if (post_type_supports($type, 'trackbacks')) {
+        }
 
-		// Content
-		if (post_type_supports($type, 'editor'))
-		{
-			$row['post_content'] = '<p>'.implode('</p><p>', $generator->paragraphs(rand(1, 4))).'</p>';
-			$row['post_content'] .= '<!--more-->';
-			$row['post_content'] .= '<p>'.implode('</p><p>', $generator->paragraphs(rand(2, 6))).'</p>';
-			if ($galleriesFlag)
-			{
-				$row['post_content'] .= '<h3>Image Gallery</h3>'.$this->getRandomGallery($category);
-			}
-			if ($videosFlag)
-			{
-				$row['post_content'] .= '<h3>Video</h3>'.PHP_EOL.$this->getRandomMedia($category).PHP_EOL;
-			}
-		}
+        // Comments
+        if (post_type_supports($type, 'comments')) {
+        }
 
-		// Author
-		if (post_type_supports($type, 'author') && $authorFlag == 'random')
-		{
-			$row['post_author'] = $this->getRandomUser();
-		}
+        // Revisions
+        if (post_type_supports($type, 'revisions')) {
+        }
 
-		// Excerpt
-		if (post_type_supports($type, 'excerpt'))
-		{
+        // Page attributes
+        if (post_type_supports($type, 'page-attributes')) {
+        }
 
-		}
+        // Post formats
+        if (post_type_supports($type, 'post-formats')) {
+        }
 
-		// Trackbacks
-		if (post_type_supports($type, 'trackbacks'))
-		{
+        // Taxonomies
+        $taxonomies = get_object_taxonomies($type, 'names');
+        $args = array('orderby' => 'name', 'order' => 'ASC', 'hide_empty' => true, 'exclude' => array(), 'exclude_tree' => array(), 'include' => array(), 'number' => '', 'fields' => 'all', 'slug' => '', 'parent' => '', 'hierarchical' => true, 'child_of' => 0, 'get' => '', 'name__like' => '', 'description__like' => '', 'pad_counts' => false, 'offset' => '', 'search' => '', 'cache_domain' => 'core');
 
-		}
+        $terms = get_terms($taxonomies, $args);
 
-		// Comments
-		if (post_type_supports($type, 'comments'))
-		{
+        // See http://codex.wordpress.org/Function_Reference/wp_insert_post
+        $postId = wp_insert_post($row);
 
-		}
+        // Set category
+        wp_set_post_terms($postId, $category->id, 'category');
 
-		// Revisions
-		if (post_type_supports($type, 'revisions'))
-		{
+        // Set tags
+        $tags = $this->getRandomTags($category);
+        wp_set_post_terms($postId, $tags, 'post_tag');
 
-		}
+        // Thumbnail
+        if (post_type_supports($type, 'thumbnail') && $imagesFlag) {
+            $image = $this->getRandomImage($category);
+            $result = wp_remote_get($image, array('timeout' => 30, 'sslverify' => false));
+            if (is_wp_error($result)) {
+                $error = 'Could not fetch sample image: '.$image.'. Error: '.$result->get_error_message();
+                // Fallback to file_get_contents - wp_remote_get has issues with SSLv3
+                $result = array('body' => @file_get_contents($image));
+                if (!$result['body']) {
+                    status_header(500);
+                    _e($error);
+                    return false;
+                }
+            }
+            $buffer = $result['body'];
+            $basename = basename($image);
+            $uploadDirectory = wp_upload_dir();
+            $filename = wp_unique_filename($uploadDirectory['path'], $basename);
+            $target = $uploadDirectory['path'].'/'.$filename;
+            file_put_contents($target, $buffer);
 
-		// Page attributes
-		if (post_type_supports($type, 'page-attributes'))
-		{
+            $filetype = wp_check_filetype($target);
+            $title = $filename;
+            $content = '';
+            if ($exif = @wp_read_image_metadata($target)) {
+                if (trim($exif['title'])) {
+                    $title = $exif['title'];
+                }
 
-		}
+                if (trim($exif['caption'])) {
+                    $content = $exif['caption'];
+                }
+            }
+            $url = $uploadDirectory['baseurl'].'/'.$category->images.'/'.$filename;
+            $attachment = array('post_mime_type' => $filetype['type'], 'guid' => $url, 'post_parent' => $postId, 'post_title' => $title, 'post_content' => $content, );
+            $thumbnailId = wp_insert_attachment($attachment, $target, $postId);
+            if (!is_wp_error($thumbnailId)) {
+                wp_update_attachment_metadata($thumbnailId, wp_generate_attachment_metadata($thumbnailId, $target));
+                add_post_meta($postId, '_thumbnail_id', $thumbnailId);
+            }
+        }
 
-		// Post formats
-		if (post_type_supports($type, 'post-formats'))
-		{
+        // If it's the last post perform clean up
+        if ($offset == $total) {
+            WP_Filesystem();
+            global $wp_filesystem;
+            $uploadDirectory = wp_upload_dir();
+            foreach ($definitions as $definition) {
+                if (trim($definition->images) != '') {
+                    $wp_filesystem->delete($uploadDirectory['basedir'].$definition->images, true);
+                }
+            }
+        }
 
-		}
+        $response = new stdClass;
+        $response->offset = $offset;
+        $response->definitions = $definitions;
+        echo json_encode($response);
+    }
 
-		// Taxonomies
-		$taxonomies = get_object_taxonomies($type, 'names');
-		$args = array('orderby' => 'name', 'order' => 'ASC', 'hide_empty' => true, 'exclude' => array(), 'exclude_tree' => array(), 'include' => array(), 'number' => '', 'fields' => 'all', 'slug' => '', 'parent' => '', 'hierarchical' => true, 'child_of' => 0, 'get' => '', 'name__like' => '', 'description__like' => '', 'pad_counts' => false, 'offset' => '', 'search' => '', 'cache_domain' => 'core');
+    private function generateUsers($count, $role)
+    {
+        require_once FILLITUP_DIR.'admin/lib/autoload.php';
+        $generator = Faker\Factory::create();
+        for ($i = 0; $i < $count; $i++) {
+            $user_id = wp_create_user($generator->userName, $generator->password, $generator->email);
+            if ($user_id) {
+                $name = $generator->name;
+                wp_update_user(array('ID' => $user_id, 'nickname' => $name, 'display_name' => $name));
+                $user = new WP_User($user_id);
+                $user->set_role($role);
+            }
+        }
+    }
 
-		$terms = get_terms($taxonomies, $args);
+    private function getRandomUser()
+    {
+        global $wpdb;
+        $rows = $wpdb->get_results('SELECT ID FROM '.$wpdb->users.' ORDER BY RAND() LIMIT 1');
+        return $rows[0]->ID;
+    }
 
-		// See http://codex.wordpress.org/Function_Reference/wp_insert_post
-		$postId = wp_insert_post($row);
+    private function generateCategories(&$definitions)
+    {
+        foreach ($definitions as $category) {
+            $category->id = wp_create_category($category->name);
+        }
+    }
 
-		// Set category
-		wp_set_post_terms($postId, $category->id, 'category');
+    private function getRandomCategory($definitions)
+    {
+        $key = array_rand($definitions);
+        return $definitions[$key];
+    }
 
-		// Set tags
-		$tags = $this->getRandomTags($category);
-		wp_set_post_terms($postId, $tags, 'post_tag');
+    private function getRandomTags($category)
+    {
+        return array_rand(array_flip($category->tags), 3);
+    }
 
-		// Thumbnail
-		if (post_type_supports($type, 'thumbnail') && $imagesFlag)
-		{
-			$image = $this->getRandomImage($category);
-			$result = wp_remote_get($image, array('timeout' => 30, 'sslverify' => false));
-			if (is_wp_error($result))
-			{
-				$error = 'Could not fetch sample image: '.$image.'. Error: '.$result->get_error_message();
-				// Fallback to file_get_contents - wp_remote_get has issues with SSLv3
-				$result = array('body' => @file_get_contents($image));
-				if(!$result['body'])
-				{
-					status_header(500);
-					_e($error);
-					return false;
-				}
-			}
-			$buffer = $result['body'];
-			$basename = basename($image);
-			$uploadDirectory = wp_upload_dir();
-			$filename = wp_unique_filename($uploadDirectory['path'], $basename);
-			$target = $uploadDirectory['path'].'/'.$filename;
-			file_put_contents($target, $buffer);
+    private function getRandomMedia($category)
+    {
+        return $category->media[array_rand($category->media)];
+    }
 
-			$filetype = wp_check_filetype($target);
-			$title = $filename;
-			$content = '';
-			if ($exif = @wp_read_image_metadata($target))
-			{
-				if (trim($exif['title']))
-				{
-					$title = $exif['title'];
-				}
+    private function getRandomGallery($category)
+    {
+        return $category->galleries[array_rand($category->galleries)];
+    }
 
-				if (trim($exif['caption']))
-				{
-					$content = $exif['caption'];
-				}
-			}
-			$url = $uploadDirectory['baseurl'].'/'.$category->images.'/'.$filename;
-			$attachment = array('post_mime_type' => $filetype['type'], 'guid' => $url, 'post_parent' => $postId, 'post_title' => $title, 'post_content' => $content, );
-			$thumbnailId = wp_insert_attachment($attachment, $target, $postId);
-			if (!is_wp_error($thumbnailId))
-			{
-				wp_update_attachment_metadata($thumbnailId, wp_generate_attachment_metadata($thumbnailId, $target));
-				add_post_meta($postId, '_thumbnail_id', $thumbnailId);
-			}
-		}
-
-		// If it's the last post perform clean up
-		if ($offset == $total)
-		{
-			WP_Filesystem();
-			global $wp_filesystem;
-			$uploadDirectory = wp_upload_dir();
-			foreach ($definitions as $definition)
-			{
-				if (trim($definition->images) != '')
-				{
-					$wp_filesystem->delete($uploadDirectory['basedir'].$definition->images, true);
-				}
-			}
-		}
-
-		$response = new stdClass;
-		$response->offset = $offset;
-		$response->definitions = $definitions;
-		echo json_encode($response);
-
-	}
-
-	private function generateUsers($count, $role)
-	{
-		require_once FILLITUP_DIR.'admin/lib/autoload.php';
-		$generator = Faker\Factory::create();
-		for ($i = 0; $i < $count; $i++)
-		{
-			$user_id = wp_create_user($generator->userName, $generator->password, $generator->email);
-			if($user_id) {
-				$name = $generator->name;
-				wp_update_user(array('ID' => $user_id, 'nickname' => $name, 'display_name' => $name));
-				$user = new WP_User( $user_id );
- 				$user->set_role($role);
-			}
-		}
-	}
-
-	private function getRandomUser()
-	{
-		global $wpdb;
-		$rows = $wpdb->get_results('SELECT ID FROM '.$wpdb->users.' ORDER BY RAND() LIMIT 1');
-		return $rows[0]->ID;
-	}
-
-	private function generateCategories(&$definitions)
-	{
-		foreach ($definitions as $category)
-		{
-			$category->id = wp_create_category($category->name);
-		}
-	}
-
-	private function getRandomCategory($definitions)
-	{
-		$key = array_rand($definitions);
-		return $definitions[$key];
-	}
-
-	private function getRandomTags($category)
-	{
-		return array_rand(array_flip($category->tags), 3);
-	}
-
-	private function getRandomMedia($category)
-	{
-		return $category->media[array_rand($category->media)];
-	}
-
-	private function getRandomGallery($category)
-	{
-		return $category->galleries[array_rand($category->galleries)];
-	}
-
-	private function getRandomImage($category)
-	{
-		$uploadDirectory = wp_upload_dir();
-		$images = glob($uploadDirectory['basedir'].$category->images.'/*.{jpg,jpeg,JPG,JPEG}', GLOB_BRACE);
-		return $uploadDirectory['baseurl'].$category->images.'/'.basename($images[array_rand($images)]);
-	}
-
+    private function getRandomImage($category)
+    {
+        $uploadDirectory = wp_upload_dir();
+        $images = glob($uploadDirectory['basedir'].$category->images.'/*.{jpg,jpeg,JPG,JPEG}', GLOB_BRACE);
+        return $uploadDirectory['baseurl'].$category->images.'/'.basename($images[array_rand($images)]);
+    }
 }

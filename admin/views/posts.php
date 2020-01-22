@@ -14,28 +14,27 @@ if (!defined('ABSPATH')) {
 
 class FillItUpViewPosts
 {
-	public $layout = 'posts';
+    public $layout = 'posts';
 
-	public function display()
-	{
-		$native = array();
-		$native[] = get_post_type_object('post');
-		$native[] = get_post_type_object('page');
+    public function display()
+    {
+        $native = array();
+        $native[] = get_post_type_object('post');
+        $native[] = get_post_type_object('page');
 
-		$args = array(
-			'public' => true,
-			'_builtin' => false
-		);
-		$custom = get_post_types($args, 'objects');
+        $args = array(
+            'public' => true,
+            '_builtin' => false
+        );
+        $custom = get_post_types($args, 'objects');
 
-		$postTypes = array_merge($native, $custom);
+        $postTypes = array_merge($native, $custom);
 
-		$layout = FILLITUP_DIR.'admin/layouts/'.$this->layout.'.php';
-		ob_start();
-		include $layout;
-		$output = ob_get_contents();
-		ob_end_clean();
-		echo $output;
-	}
-
+        $layout = FILLITUP_DIR.'admin/layouts/'.$this->layout.'.php';
+        ob_start();
+        include $layout;
+        $output = ob_get_contents();
+        ob_end_clean();
+        echo $output;
+    }
 }
