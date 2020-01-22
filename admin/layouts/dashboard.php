@@ -90,7 +90,7 @@ if (!defined('ABSPATH')) {
             <div class="clr"></div>
         </div>
         <div id="fillItUpAdminFooter">
-            <a target="_blank" href="https://github.com/kodeka/kdk_fill_it_up">Fill It Up v1.0.2</a> | Copyright &copy; 2018-<?php echo date('Y'); ?> <a target="_blank" href="https://kodeka.io">Kodeka OÜ</a>.
+            <a target="_blank" href="https://github.com/kodeka/kdk_fill_it_up">Fill It Up v1.0.3</a> | Copyright &copy; 2018-<?php echo date('Y'); ?> <a target="_blank" href="https://kodeka.io">Kodeka OÜ</a>.
         </div>
     </div>
 </div>

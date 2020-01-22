@@ -1,4 +1,4 @@
-# Fill It Up (for WordPress) [v1.0.2]
+# Fill It Up (for WordPress) [v1.0.3]
 Fill It Up for WordPress is a handy free plugin to mass generate content & users in WordPress.
 
 You have the choice of easily creating your own set of re-usable dummy content (essentially made up of sets of images, links and embedded media) or you can use third-party sets, curated by other users.
@@ -23,7 +23,7 @@ In the future, we plan to release pre-built sets of definition files from other 
 
 
 ## Use it
-1. Get the latest build, ready to upload to WordPress: https://www.joomlaworks.net/downloads/?f=jw_fillitup_for_wp-v1.0.2.zip (please DO NOT use the zip file download provided by GitHub automatically as it cannot be directly installed on WordPress)
+1. Get the latest build, ready to upload to WordPress: # (please DO NOT use the repo "master" zip file as it cannot be directly installed on WordPress)
 2. Edit the plugin's Settings and add this demo definition file:
    - If you already use HTTPS: https://cdn.joomlaworks.org/fillitup/demo/900x600.json
    - If you get any issues related to SSL (especially while testing Fill It Up locally), use this URL instead: http://cdn.joomlaworks.org/fillitup/demo/900x600_plain_http.json

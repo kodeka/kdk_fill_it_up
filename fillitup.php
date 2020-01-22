@@ -3,7 +3,7 @@
  * Plugin Name:  Fill It Up (by Kodeka)
  * Plugin URI:   https://github.com/kodeka/kdk_fill_it_up
  * Description:  Dummy content & user generator for WordPress
- * Version:      1.0.2
+ * Version:      1.0.3
  * Author:       Kodeka
  * Author URI:   https://kodeka.io
  * License:      GNU/GPL https://www.gnu.org/copyleft/gpl.html
@@ -107,8 +107,8 @@ class FillItUp
     {
         $screen = get_current_screen();
         if ($screen->id == 'fillitup/admin/index' || $screen->id == 'settings_page_fillitup-options') {
-            wp_enqueue_script('fillitup', plugins_url('/fillitup/admin/assets/js/fillitup.js'), array('jquery'), '1.0.2');
-            wp_enqueue_style('fillitup', plugins_url('/fillitup/admin/assets/css/fillitup.css'), array(), '1.0.2');
+            wp_enqueue_script('fillitup', plugins_url('/fillitup/admin/assets/js/fillitup.js'), array('jquery'), '1.0.3');
+            wp_enqueue_style('fillitup', plugins_url('/fillitup/admin/assets/css/fillitup.css'), array(), '1.0.3');
         }
     }
 
