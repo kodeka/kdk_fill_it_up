@@ -1,10 +1,10 @@
 <?php
 /**
- * @version    1.0.x
- * @package    Fill It Up
- * @author     JoomlaWorks https://www.joomlaworks.net
- * @copyright  Copyright (c) 2006 - 2018 JoomlaWorks Ltd. All rights reserved.
- * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @version    1.x
+ * @package    Fill It Up (Plugin)
+ * @author     Kodeka - https://kodeka.io
+ * @copyright  Copyright (c) 2018 - 2020 Kodeka OÜ. All rights reserved.
+ * @license    GNU/GPL license: https://www.gnu.org/copyleft/gpl.html
  */
 
 // Exit if accessed directly
@@ -89,7 +89,7 @@ if (!defined('ABSPATH')) {
 			</div>
 		</div>
 		<div id="fillItUpAdminFooter">
-			<a target="_blank" href="https://www.joomlaworks.net/fill-it-up">Fill It Up v1.0.2</a> | Copyright &copy; 2006-<?php echo date('Y'); ?> <a target="_blank" href="https://www.joomlaworks.net/">JoomlaWorks Ltd.</a>
+			<a target="_blank" href="https://github.com/kodeka/kdk_fill_it_up">Fill It Up v1.0.2</a> | Copyright &copy; 2018-<?php echo date('Y'); ?> <a target="_blank" href="https://kodeka.io">Kodeka OÜ</a>.
 		</div>
 	</div>
 </div>

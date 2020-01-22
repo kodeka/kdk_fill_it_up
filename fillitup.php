@@ -1,10 +1,12 @@
 <?php
 /*
- Plugin Name: Fill It Up
- Description: Dummy content & user generator for WordPress
- Author: JoomlaWorks
- Version: 1.0.2
- Author URI: https://www.joomlaworks.net
+ * Plugin Name:  Fill It Up (by Kodeka)
+ * Plugin URI:   https://github.com/kodeka/kdk_fill_it_up
+ * Description:  Dummy content & user generator for WordPress
+ * Version:      1.0.2
+ * Author:       Kodeka
+ * Author URI:   https://kodeka.io
+ * License:      GNU/GPL https://www.gnu.org/copyleft/gpl.html
  */
 
 // Exit if accessed directly
@@ -68,7 +70,7 @@ class FillItUp
 		settings_fields('basic');
 		do_settings_sections('fillitup-section');
 		submit_button();
-		echo '<p>'.__('Hint: make sure the remote URL ends in .json - it would be awesome if you had a look at the <a href="https://www.joomlaworks.net/fill-it-up-documentation">documentation</a> as well :)', 'jw_fillitup').'</p></form></div>';
+		echo '<p>'.__('Hint: make sure the remote URL ends in .json - it would be awesome if you had a look at the <a href="https://github.com/kodeka/kdk_fill_it_up">documentation</a> as well :)', 'jw_fillitup').'</p></form></div>';
 	}
 
 	public function adminInit()

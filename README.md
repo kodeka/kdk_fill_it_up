@@ -1,25 +1,17 @@
 # Fill It Up (for WordPress) [v1.0.2]
-Fill It Up for WordPress is a handy free plugin to mass generate content &amp; users in WordPress.
+Fill It Up for WordPress is a handy free plugin to mass generate content & users in WordPress.
 
-You have the choice of easily creating your own set of re-usable dummy content (essentially made up of sets of images, links and embed snippets) or you can use third-party sets, curated by other users.
+You have the choice of easily creating your own set of re-usable dummy content (essentially made up of sets of images, links and embedded media) or you can use third-party sets, curated by other users.
 
 By using Fill It Up you speed up the initial development process until actual, proper content is in place.
 
 It's that simple. Really :)
 
-That's why it took only a few minutes to set up this demo site: http://demo.joomlaworks.net/wp/
+That's why it took only a few minutes to set up this demo site: https://demo.joomlaworks.net/wp/
 
 
 ## Screenshots
 ![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_for_wordpress_v1.x_preview.png)
-
-
-## Demos
-Check out the official demo site: http://demo.joomlaworks.net/wp/
-
-Our friends at CSSIgniter have also uploaded a demo site featuring their latest free theme, [Olsen](http://www.cssigniter.com/ignite/themes/olsen-light/), using Fill It Up (for WordPress): http://www.cssigniter.com/playground/
-
-*Are you a theme developer using Fill It Up (for WordPress)? [Get in touch with us](https://www.joomlaworks.net/support/contact) and ask to include your demo sites here too!*
 
 
 ## Why?
@@ -27,7 +19,7 @@ Custom dummy content should not be hard to make. Unlike other solutions, you get
 
 It's what we like to call "curated sample data sets"!
 
-In the future, we plan to release pre-built sets of definition files from other users, covering different types of dummy content (e.g. politics, cars, design, fashion, news etc.) for anyone to re-use and get from prototyping to a production ready WordPress site in hours, not days!
+In the future, we plan to release pre-built sets of definition files from other users, covering different types of dummy content (e.g. news, blog posts, politics, cars, design, fashion etc.) for anyone to re-use and get from prototyping to a production ready WordPress site in hours, not days!
 
 
 ## Use it
@@ -48,17 +40,15 @@ You'll notice that this file references some .zip files. These .zip files contai
 
 
 ## Upgrading
-Until we upload the plugin in the WordPress Plugis Directory, there are 2 ways to update Fill It Up in WordPress:
+Until we upload the plugin in the WordPress Plugins Directory, there are 2 ways to update Fill It Up in WordPress:
 
 a) The easy way: use the awesome & free [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin to be able to simply install any new version of Fill It Up on top of any existing one.
 
-b) The old-fashioned way: use FTP to connect to your WordPress site and then navigate to your plugins folder and simply remove the folder named "fillitup". Now extract on your PC the zip download with the new version and upload the entire "fillitup" folder on your WordPress site's plugins folder.
+b) The old-fashioned way: use (S)FTP to connect to your WordPress site and then navigate to your plugins folder and simply remove the folder named "fillitup". Now extract on your PC the zip download with the new version and upload the entire "fillitup" folder on your WordPress site's plugins folder.
 
 
-***Enjoy and share it :)***
+## License & Credits
 
-===
+Licensed under the GNU/GPL license (https://www.gnu.org/copyleft/gpl.html).
 
-Fill It Up for WordPress is released under the GNU/GPL license.
-
-Copyright (c) 2006 - 2018 [JoomlaWorks Ltd.](https://www.joomlaworks.net)
+Copyright (c) 2018 - 2020 Kodeka OÜ. All rights reserved.
