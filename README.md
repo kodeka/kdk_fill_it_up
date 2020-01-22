@@ -47,6 +47,12 @@ a) The easy way: use the awesome & free [Easy Theme and Plugin Upgrades](https:/
 b) The old-fashioned way: use (S)FTP to connect to your WordPress site and then navigate to your plugins folder and simply remove the folder named "fillitup". Now extract on your PC the zip download with the new version and upload the entire "fillitup" folder on your WordPress site's plugins folder.
 
 
+## To Do
+
+- Upgrade Faker
+- Allow for dynamically importing random images (by subject) from Unsplash.com
+
+
 ## License & Credits
 
 Licensed under the GNU/GPL license (https://www.gnu.org/copyleft/gpl.html).
