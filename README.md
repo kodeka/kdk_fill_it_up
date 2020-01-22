@@ -25,8 +25,8 @@ In the future, we plan to release pre-built sets of definition files from other 
 ## Use it
 1. Get the latest build, ready to upload to WordPress: https://github.com/kodeka/kdk_fill_it_up/releases/download/v1.0.3/kdk_fill_it_up-v1.0.3.zip (please DO NOT use the repo "master" zip file as it cannot be directly installed on WordPress)
 2. Edit the plugin's Settings and add this demo definition file:
-   - If you already use HTTPS: https://cdn.joomlaworks.org/fillitup/demo/900x600.json
-   - If you get any issues related to SSL (especially while testing Fill It Up locally), use this URL instead: http://cdn.joomlaworks.org/fillitup/demo/900x600_plain_http.json
+   - If you already use HTTPS: https://cdn.kodeka.net/wordpress/kdk_fill_it_up/900x600.json
+   - If you get any issues related to SSL (especially while testing Fill It Up locally), use this URL instead: http://cdn.kodeka.net/wordpress/kdk_fill_it_up/900x600_plain_http.json
 3. Go back to the plugin and hit "Generate content & users"
 4. Adjust your settings and go!
 
@@ -34,7 +34,7 @@ Depending on the number of items you choose to generate, it will take from a few
 
 
 ## Create your own dummy content sets
-Examine the structure of the demo definition file: https://cdn.joomlaworks.org/fillitup/demo/900x600.json
+Examine the structure of the demo definition file: https://cdn.kodeka.net/wordpress/kdk_fill_it_up/900x600.json
 
 You'll notice that this file references some .zip files. These .zip files contain images which are fetched by Fill It Up and inserted in WordPress items in the category name specified in the same definition block. Additionally, per category block, you can pass one JavaScript array for videos (use links for video providers supported by WordPress using oEmbed, e.g. YouTube or Vimeo, or use entire embed snippets for others) and one JavaScript array for Flickr sets (albums) (use entire embed snippets). Now since the file has to be valid JSON, make sure you escape any double quotes (\") when inserting embed snippets into each array.
 
