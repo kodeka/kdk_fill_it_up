@@ -23,7 +23,7 @@ In the future, we plan to release pre-built sets of definition files from other 
 
 
 ## Use it
-1. Get the latest build, ready to upload to WordPress: # (please DO NOT use the repo "master" zip file as it cannot be directly installed on WordPress)
+1. Get the latest build, ready to upload to WordPress: https://github.com/kodeka/kdk_fill_it_up/releases/download/v1.0.3/kdk_fill_it_up-v1.0.3.zip (please DO NOT use the repo "master" zip file as it cannot be directly installed on WordPress)
 2. Edit the plugin's Settings and add this demo definition file:
    - If you already use HTTPS: https://cdn.joomlaworks.org/fillitup/demo/900x600.json
    - If you get any issues related to SSL (especially while testing Fill It Up locally), use this URL instead: http://cdn.joomlaworks.org/fillitup/demo/900x600_plain_http.json
