@@ -85,7 +85,7 @@ if (!defined('ABSPATH')) {
                         <?php _e('Fill It Up is a simple tool you can use to mass generate dummy content & users for your WordPress website. By using Fill It Up you speed up the initial development process until actual, proper content is in place.', 'kdk_fill_it_up'); ?>
                     </div>
                 </div>
-                <a href="admin.php?page=fillitup/admin/index.php&amp;view=posts" class="button button-primary button-large"><?php _e('Generate content & users', 'kdk_fill_it_up'); ?></a>
+                <a href="admin.php?page=kdk_fill_it_up/admin/index.php&amp;view=posts" class="button button-primary button-large"><?php _e('Generate content & users', 'kdk_fill_it_up'); ?></a>
             </div>
             <div class="clr"></div>
         </div>

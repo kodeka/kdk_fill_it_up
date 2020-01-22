@@ -58,9 +58,9 @@ class FillItUp
             $this,
             '_settings'
         ));
-        add_menu_page('Fill It Up', 'Fill It Up', 'manage_options', 'fillitup/admin/index.php', '', 'data:image/svg+xml;base64,'.base64_encode(file_get_contents(FILLITUP_DIR.'admin/assets/images/fillitup.svg')));
-        add_submenu_page('fillitup/admin/index.php', 'Generator', 'Generator', 'manage_options', 'fillitup/admin/index.php');
-        add_submenu_page('fillitup/admin/index.php', 'Settings', 'Settings', 'manage_options', 'options-general.php?page=fillitup-options');
+        add_menu_page('Fill It Up', 'Fill It Up', 'manage_options', 'kdk_fill_it_up/admin/index.php', '', 'data:image/svg+xml;base64,'.base64_encode(file_get_contents(FILLITUP_DIR.'admin/assets/images/fillitup.svg')));
+        add_submenu_page('kdk_fill_it_up/admin/index.php', 'Generator', 'Generator', 'manage_options', 'kdk_fill_it_up/admin/index.php');
+        add_submenu_page('kdk_fill_it_up/admin/index.php', 'Settings', 'Settings', 'manage_options', 'options-general.php?page=fillitup-options');
     }
 
     public function _settings()
@@ -106,9 +106,9 @@ class FillItUp
     public function adminEnqueueScripts()
     {
         $screen = get_current_screen();
-        if ($screen->id == 'fillitup/admin/index' || $screen->id == 'settings_page_fillitup-options') {
-            wp_enqueue_script('fillitup', plugins_url('/fillitup/admin/assets/js/fillitup.js'), array('jquery'), '1.0.3');
-            wp_enqueue_style('fillitup', plugins_url('/fillitup/admin/assets/css/fillitup.css'), array(), '1.0.3');
+        if ($screen->id == 'kdk_fill_it_up/admin/index' || $screen->id == 'settings_page_fillitup-options') {
+            wp_enqueue_script('fillitup', plugins_url('/kdk_fill_it_up/admin/assets/js/fillitup.js'), array('jquery'), '1.0.3');
+            wp_enqueue_style('fillitup', plugins_url('/kdk_fill_it_up/admin/assets/css/fillitup.css'), array(), '1.0.3');
         }
     }
 

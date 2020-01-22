@@ -83,8 +83,8 @@ if (!defined('ABSPATH')) {
     </div>
     <div id="fillitup-completed-message" style="display:none;">
         <h3><?php _e('Success!', 'kdk_fill_it_up'); ?></h3>
-        <a href="admin.php?page=fillitup/admin/index.php" class="button button-primary"><?php _e('Back to Fill It Up', 'kdk_fill_it_up'); ?></a> <?php _e('or', 'kdk_fill_it_up'); ?> <a id="fillitup-start-over-button" href="#" class="button button-primary"><?php _e('Start Over', 'kdk_fill_it_up'); ?></a>
-        <img id="fillitup-success-img" src="<?php echo plugins_url(); ?>/fillitup/admin/assets/images/sam_rockwell_yeah.gif" alt="Success!" />
+        <a href="admin.php?page=kdk_fill_it_up/admin/index.php" class="button button-primary"><?php _e('Back to Fill It Up', 'kdk_fill_it_up'); ?></a> <?php _e('or', 'kdk_fill_it_up'); ?> <a id="fillitup-start-over-button" href="#" class="button button-primary"><?php _e('Start Over', 'kdk_fill_it_up'); ?></a>
+        <img id="fillitup-success-img" src="<?php echo plugins_url(); ?>/kdk_fill_it_up/admin/assets/images/sam_rockwell_yeah.gif" alt="Success!" />
     </div>
     <div id="fillItUpAdminFooter">
         <a target="_blank" href="https://github.com/kodeka/kdk_fill_it_up">Fill It Up v1.0.3</a> | Copyright &copy; 2018-<?php echo date('Y'); ?> <a target="_blank" href="https://kodeka.io">Kodeka OÜ</a>.
