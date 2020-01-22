@@ -1,5 +1,5 @@
-# Fill It Up (for WordPress) [v1.0.3]
-Fill It Up for WordPress is a handy free plugin to mass generate content & users in WordPress.
+# KDK Fill It Up (v1.0.3 / Jan 2020)
+Fill It Up (for WordPress) is a handy free plugin to mass generate content & users in WordPress.
 
 You have the choice of easily creating your own set of re-usable dummy content (essentially made up of sets of images, links and embedded media) or you can use third-party sets, curated by other users.
 
