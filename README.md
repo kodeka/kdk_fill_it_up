@@ -11,7 +11,7 @@ That's why it took only a few minutes to set up this demo site: https://demo.joo
 
 
 ## Screenshots
-![Fill It Up v1.x - Preview](https://cdn.joomlaworks.org/fillitup/assets/fill-it-up_for_wordpress_v1.x_preview.png)
+![Fill It Up v1.x - Preview](https://cdn.jsdelivr.net/gh/kodeka/kdk_fill_it_up@master/admin/assets/images/kdk_fill_it_up_preview_20200122.png)
 
 
 ## Why?
